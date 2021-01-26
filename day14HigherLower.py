@@ -5,17 +5,31 @@
 # todo: import art and game data
 from art import hllogo, vs
 from game_data import data
-import random 
+import random
 # todo: welcome player to game and brief intro
-pprint("Welcome to the higher lower game! Guess which instagram acoount has more followers!")
+print("Welcome to the higher lower game! Guess which instagram acoount has more followers!")
 # todo: display random a and b info and ask user whether a or b has more followers
 
 def randomPerson():
   return random.choice(data)
 
-
+print(f'Compare A: {randomPerson()}')
+print(vs)
+print(f'Against B: {randomPerson()}')
 choice = input("Who has more followers? Type 'A' or 'B': ")
+
 # todo: check whether the user has the right answer
+  #if A[i] > B[i] and choice == "A"
+    #keep A to move on to the next round
+    #choose new opponent
+    #repeat
+  #elif B[i] > A[i] and choice == "B"
+    #turn B into A for next round
+    #choose new opponent
+    #repeat
+  #else
+    #end game
+
 # todo: if the user has the right answer add a point to their total
 # todo: if the user has the right answer make person b person a for the next round
 # todo: if the user has the wrong answer end the game and show them their total score
