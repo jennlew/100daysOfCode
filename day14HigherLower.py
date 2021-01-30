@@ -10,26 +10,26 @@ import random
 # todo: welcome player to game and brief intro
 print(logo)
 print("Welcome to the higher lower game! Guess which instagram acoount has more followers!")
-# todo: display random a and b info and ask user whether a or b has more followers
 
+def format_data(account):
+  """format the account data"""
+  accountName = account["name"]
+  accountDesc = account["description"]
+  accountCountry =account["country"]
+  return(f'{accountName}, a {accountDesc} from {accountCountry}')
+
+# todo: display random a and b info and ask user whether a or b has more followers
 #generate random account from the game data
 accountA = random.choice(data)
 accountB = random.choice(data)
-
 if accountA == accountB:
   accountB = random.choice(data)
 
-#format the account data
-accountName = accountA["name"]
-accountDesc = accountA["description"]
-accountCountry =accountA["country"]
-# def randomPerson():
-#   return random.choice(data)
+print(f"Compare A: {format_data(accountA)}")
+print(vs)
+print(f"Against B: {format_data(accountB)}")
 
-# print(f'Compare A: {randomPerson()}')
-# print(vs)
-# print(f'Against B: {randomPerson()}')
-# choice = input("Who has more followers? Type 'A' or 'B': ")
+choice = input("Who has more followers? Type 'A' or 'B': ").lower()
 
 # todo: check whether the user has the right answer
 # make sure that you get the index of the dictionary item that is the number of followers
