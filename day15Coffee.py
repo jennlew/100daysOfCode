@@ -30,6 +30,7 @@ resources = {
     "coffee": 100,
 }
 
+
 def checkResource(orderIngredients):
     """Returns True when order can be made, False if ingredients are insufficient"""
     for item in orderIngredients:
@@ -37,6 +38,7 @@ def checkResource(orderIngredients):
             print(f"Sorry there is not enough {item}")
             return False
     return True
+
 
 def processCoins():
     """Returns the total calculated from coins entered"""
@@ -47,8 +49,26 @@ def processCoins():
     total += int(input("How many pennies?: ")) * 0.01
     return total
 
-coffeeServed = True
 
+def isTransactionSuccessful(moneyReceived, drinkCost):
+    """Return True when the payment is accepted or return False if the money is insufficient"""
+    if moneyReceived >= drinkCost:
+        change = round(moneyReceived - drinkCost, 2)
+        print(f"Here is ${change} in change.")
+        global profit
+        profit += drinkCost
+        return True
+    else:
+        print("Sorry that's not enough money. Money refunded.")
+        return False
+
+
+def makeCoffee(drinkName, orderIngredients):
+    """Deduct the required ingredients from the resources"""
+    for item in orderIngredients:
+        resources[item] -= orderIngredients[item]
+    print(f"Here is your {drinkName} ☕️. Enjoy!")
+coffeeServed = True
 
 while coffeeServed:
     coffeeChoice = input("What would you like? (espresso/latte/cappuccino) ").lower()
@@ -58,28 +78,10 @@ while coffeeServed:
         print(f"Water: {resources['water']}ml")
         print(f"Milk: {resources['milk']}ml")
         print(f"Coffee: {resources['coffee']}g")
-        print(f"Money: £{profit}")
+        print(f"Money: ${profit}")
     else:
         drink = MENU[coffeeChoice]
         if checkResource(drink['ingredients']):
             payment = processCoins()
-
-    # if coffeeChoice == 'espresso':
-    #     if resources["water"] < 50:
-    #         print("Sorry there is not enough water")
-    #     elif resources["coffee"] < 18:
-    #         print("Sorry they is not enough coffee")
-    # if coffeeChoice == 'latte':
-    #     if resources["water"] < 200:
-    #         print("Sorry there is not enough water")
-    #     elif resources["coffee"] < 24:
-    #         print("Sorry they is not enough coffee")
-    #     elif resources["milk"] < 150:
-    #         print("Sorry there is not enough milk")
-    # if coffeeChoice == 'cappuccino':
-    #     if resources["water"] < 250:
-    #         print("Sorry there is not enough water")
-    #     elif resources["coffee"] < 24:
-    #         print("Sorry they is not enough coffee")
-    #     elif resources["milk"] < 100:
-    #         print("Sorry there is not enough milk")
+            if isTransactionSuccessful(payment, drink["cost"]):
+                makeCoffee(coffeeChoice, drink["ingredients"])
