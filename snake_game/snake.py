@@ -6,6 +6,7 @@ RIGHT = 0
 DOWN = 270
 LEFT = 180
 
+
 class Snake:
 
     def __init__(self):
