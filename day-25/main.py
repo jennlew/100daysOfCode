@@ -9,17 +9,34 @@ import pandas as pd
 #             temperatures.append(int(row[1]))
 #     print(temperatures)
 
-data = pd.read_csv("weather_data.csv")
-type(data)
+# data = pd.read_csv("weather_data.csv")
+# type(data)
+#
+# data_dict = data.to_dict()
+# temp_list = data["temp"].to_list()
+#
+# avg = 0
+# for temp in temp_list:
+#     avg += temp
+#
+# avg = avg / len(temp_list)
+# print(avg)
+# max_temp = data["temp"].max()
+# print(data[data.temp == max_temp])
 
-data_dict = data.to_dict()
-temp_list = data["temp"].to_list()
+df = pd.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
+grey = 0
+cinnamon = 0
+black = 0
+for color in df["Primary Fur Color"]:
+    if color == "Gray":
+        grey += 1
+    elif color == "Cinnamon":
+        cinnamon += 1
+    else:
+        black += 1
 
-avg = 0
-for temp in temp_list:
-    avg += temp
+color_count = pd.DataFrame({"Fur colour": ["grey", "red", "black"],
+                            "Count": [grey, cinnamon, black]})
 
-avg = avg / len(temp_list)
-print(avg)
-
-print(data["temp"].max())
+color_count.to_csv("squirrel_count.csv")
