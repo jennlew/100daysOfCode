@@ -33,7 +33,7 @@ for color in df["Primary Fur Color"]:
         grey += 1
     elif color == "Cinnamon":
         cinnamon += 1
-    else:
+    elif color == "Black":
         black += 1
 
 color_count = pd.DataFrame({"Fur colour": ["grey", "red", "black"],
