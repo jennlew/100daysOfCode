@@ -16,19 +16,21 @@ else:
 
 
 def next_card():
-    global current_card, flip_timer
+    global current_card
+    global flip_timer
     window.after_cancel(flip_timer)
     current_card = random.choice(to_learn)
     canvas.itemconfig(card_title, text="French", fill="black")
     canvas.itemconfig(card_word, text=current_card["French"], fill="black")
     canvas.itemconfig(card_background, image=card_front_img)
-    flip_timer = window.after(3000, func=flip_card)
+    flip_timer = window.after(3000, flip_card)
 
 
 def flip_card():
     canvas.itemconfig(card_title, text="English", fill="white")
     canvas.itemconfig(card_word, text=current_card["English"], fill="white")
     canvas.itemconfig(card_background, image=card_back_img)
+    window.after_cancel(flip_timer)
 
 
 def is_known():
@@ -42,7 +44,7 @@ window = Tk()
 window.title("Flashy")
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
 
-flip_timer = window.after(3000, func=flip_card)
+flip_timer = window.after(3000, flip_card)
 
 canvas = Canvas(width=800, height=526)
 card_front_img = PhotoImage(file="images/card_front.png")
