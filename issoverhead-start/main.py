@@ -8,7 +8,7 @@ MY_LAT = 51.507351 # Your latitude
 MY_LONG = -0.127758 # Your longitude
 
 load_dotenv()
-my_email = os.getenv("MY_EMAIL")*
+my_email = os.getenv("MY_EMAIL")
 password = os.getenv("PASSWORD")
 
 
